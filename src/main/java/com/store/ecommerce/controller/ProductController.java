@@ -28,4 +28,10 @@ public class ProductController {
         List<ProductResponse> productResponses = productService.getAllProducts();
         return new ResponseEntity<>(productResponses,HttpStatus.OK);
     }
+
+    @GetMapping("/getProductByName/{productName}")
+    public ResponseEntity<ProductResponse> getProductByName(@PathVariable  String productName){
+        ProductResponse productResponse = productService.getProductByName(productName);
+        return new ResponseEntity<>(productResponse,HttpStatus.OK);
+    }
 }

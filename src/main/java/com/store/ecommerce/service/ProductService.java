@@ -10,4 +10,6 @@ public interface ProductService {
     ProductResponse addProduct(ProductRequest productRequest);
 
     List<ProductResponse> getAllProducts();
+
+    ProductResponse getProductByName(String productName);
 }

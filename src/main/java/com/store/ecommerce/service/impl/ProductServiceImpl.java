@@ -39,7 +39,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-
     private ProductResponse convertedToProductDto(Product addedProduct) {
         ProductResponse productResponse = new ProductResponse();
         productResponse.setProductName(addedProduct.getProductName());
@@ -58,5 +57,11 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponse> getAllProducts() {
         List<Product> products = productRepo.findAll();
         return products.stream().map(this::convertedToProductDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductResponse getProductByName(String productName) {
+        Product product = productRepo.findByProductName(productName);
+        return convertedToProductDto(product);
     }
 }
