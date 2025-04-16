@@ -29,11 +29,11 @@ public class ProductServiceImpl implements ProductService {
         product.setCreatedAt(productRequest.getCreatedAt());
         Category category = categoryRepo.findById(productRequest.getCategoryId()).get();
         product.setCategory(category);
-        product.setListPrice(productRequest.getListPrice());
-        product.setOfferPrice(productRequest.getOfferPrice());
-        product.setImageUrl(productRequest.getImageUrl());
         product.setUpdatedAt(productRequest.getUpdatedAt());
         product.setStock(productRequest.getStock());
+        product.setMarkForDelete(productRequest.getMarkForDelete());
+        product.setKeyword(productRequest.getKeyword());
+        product.setIdentifier(productRequest.getIdentifier());
         Product addedProduct = productRepo.saveAndFlush(product);
         return convertedToProductDto(addedProduct);
     }
@@ -45,11 +45,11 @@ public class ProductServiceImpl implements ProductService {
         productResponse.setDescription(addedProduct.getDescription());
         productResponse.setCreatedAt(addedProduct.getCreatedAt());
         productResponse.setCategoryId(addedProduct.getCategory().getId());
-        productResponse.setListPrice(addedProduct.getListPrice());
-        productResponse.setOfferPrice(addedProduct.getOfferPrice());
         productResponse.setUpdatedAt(addedProduct.getUpdatedAt());
-        productResponse.setImageUrl(addedProduct.getImageUrl());
         productResponse.setStock(addedProduct.getStock());
+        productResponse.setMarkForDelete(addedProduct.getMarkForDelete());
+        productResponse.setKeyword(addedProduct.getKeyword());
+        productResponse.setIdentifier(addedProduct.getIdentifier());
         return productResponse;
     }
 

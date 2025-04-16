@@ -1,22 +1,13 @@
 package com.store.ecommerce.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class AttributeValueRequest {
     private String attrValue;
-        private Integer attributeId;
-
-    public String getAttrValue() {
-        return attrValue;
-    }
-
-    public void setAttrValue(String attrValue) {
-        this.attrValue = attrValue;
-    }
-
-    public Integer getAttributeId() {
-        return attributeId;
-    }
-
-    public void setAttributeId(Integer attributeId) {
-        this.attributeId = attributeId;
-    }
+    private Integer attributeId;
+    private Integer markForDelete;
+    private String identifier;
 }

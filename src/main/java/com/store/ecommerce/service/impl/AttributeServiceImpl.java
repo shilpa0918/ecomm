@@ -27,6 +27,9 @@ public class AttributeServiceImpl implements AttributeService {
         attribute.setAttrName(attributeRequest.getAttrName());
         Product product = productRepo.findById(attributeRequest.getProductId()).get();
         attribute.setProduct(product);
+        attribute.setKeyword(attributeRequest.getKeyword());
+        attribute.setIdentifier(attributeRequest.getIdentifier());
+        attribute.setMarkForDelete(attributeRequest.getMarkForDelete());
         Attribute savedAttribute = attributeRepo.saveAndFlush(attribute);
         return convertedIntoAttributeDto(savedAttribute);
     }
@@ -36,6 +39,9 @@ public class AttributeServiceImpl implements AttributeService {
         AttributeResponse attributeResponse = new AttributeResponse();
         attributeResponse.setAttrName(savedAttribute.getAttrName());
         attributeResponse.setProductId(savedAttribute.getProduct().getId());
+        attributeResponse.setKeyword(savedAttribute.getKeyword());
+        attributeResponse.setIdentifier(savedAttribute.getIdentifier());
+        attributeResponse.setMarkForDelete(savedAttribute.getMarkForDelete());
         return attributeResponse;
     }
 

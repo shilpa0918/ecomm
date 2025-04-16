@@ -27,6 +27,9 @@ public class AttributeValueServiceImpl implements AttributeValueService {
         Attribute attribute = attributeRepo.findById(attributeValueRequest.getAttributeId()).get();
         attributeValue.setAttribute(attribute);
         attributeValue.setAttrValue(attributeValueRequest.getAttrValue());
+        attributeValue.setMarkForDelete(attributeValueRequest.getMarkForDelete());
+        attributeValue.setIdentifier(attributeValue.getIdentifier());
+        attributeValue.setKeyword(attributeValue.getKeyword());
         AttributeValue addedAttributeValue = attributeValueRepo.saveAndFlush(attributeValue);
         return convertedIntoAttributeValueDto(addedAttributeValue);
     }
@@ -36,6 +39,9 @@ public class AttributeValueServiceImpl implements AttributeValueService {
         AttributeValueResponse attributeValueResponse = new AttributeValueResponse();
         attributeValueResponse.setAttributeId(addedAttributeValue.getAttribute().getId());
         attributeValueResponse.setAttrValue(addedAttributeValue.getAttrValue());
+        attributeValueResponse.setMarkForDelete(addedAttributeValue.getMarkForDelete());
+        attributeValueResponse.setIdentifier(addedAttributeValue.getIdentifier());
+        attributeValueResponse.setKeyword(addedAttributeValue.getKeyword());
         return attributeValueResponse;
     }
 
