@@ -15,7 +15,7 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private int quantity;
+    private Integer quantity;
     @ManyToOne
     private Product product;
 }
