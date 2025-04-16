@@ -13,9 +13,6 @@ import java.util.List;
 public class ProductRequest {
     private String productName;
     private String description;
-    private BigDecimal offerPrice;
-    private BigDecimal listPrice;
-    private String imageUrl;
     private int stock;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

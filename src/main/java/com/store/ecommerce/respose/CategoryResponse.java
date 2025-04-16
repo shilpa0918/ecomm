@@ -17,5 +17,4 @@ public class CategoryResponse {
     private LocalDateTime updatedAt;
     private String identifier;
     private String keyword;
-    private List<Integer> productIds;
 }
