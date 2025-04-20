@@ -40,4 +40,9 @@ public class ProductController {
         List<ProductResponse> productResponses = productService.getProductsByCategory(categoryName);
         return new ResponseEntity<>(productResponses, HttpStatus.OK);
     }
+    @PutMapping("/updateProductById/{productId}")
+    public ResponseEntity<ProductResponse> updateProductById(@PathVariable Integer productId,@RequestBody ProductRequest productRequest){
+        ProductResponse productResponse = productService.updateProductById(productId,productRequest);
+        return new ResponseEntity<>(productResponse,HttpStatus.OK);
+    }
 }

@@ -70,4 +70,17 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productRepo.findByCategoryCategoryName(categoryName);
         return products.stream().map(this::convertedToProductDto).collect(Collectors.toList());
     }
+
+    public ProductResponse updateProductById(Integer productId,ProductRequest productRequest) {
+        Product updatedProduct = productRepo.findById(productId).get();
+        updatedProduct.setUpdatedAt(productRequest.getUpdatedAt());
+        updatedProduct.setDescription(productRequest.getDescription());
+        updatedProduct.setProductName(productRequest.getProductName());
+        updatedProduct.setStock(productRequest.getStock());
+        updatedProduct.setMarkForDelete(productRequest.getMarkForDelete());
+        updatedProduct.setKeyword(productRequest.getKeyword());
+        updatedProduct.setIdentifier(productRequest.getIdentifier());
+        Product savedUpdatedProduct = productRepo.saveAndFlush(updatedProduct);
+        return convertedToProductDto(savedUpdatedProduct);
+    }
 }
