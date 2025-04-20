@@ -15,5 +15,4 @@ public class PriceRequest {
     private BigDecimal price;
     private String priceType; //OFFER, LIST
     private Integer productId;
-    private String identifier;
 }

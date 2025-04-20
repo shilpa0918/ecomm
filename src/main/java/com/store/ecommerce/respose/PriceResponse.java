@@ -11,5 +11,4 @@ public class PriceResponse {
     private BigDecimal price;
     private String priceType; //OFFER, LIST
     private Integer productId;
-    private String identifier;
 }

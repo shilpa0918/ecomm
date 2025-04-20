@@ -21,5 +21,4 @@ public class Price {
     private String priceType; //OFFER, LIST
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Product product;
-    private String identifier;
 }

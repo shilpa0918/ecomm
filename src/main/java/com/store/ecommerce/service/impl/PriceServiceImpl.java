@@ -12,18 +12,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class PriceServiceImpl implements PriceService {
 
-    private final PriceRepo priceRepo;
-    private final ProductRepo productRepo;
+    private PriceRepo priceRepo;
+    private ProductRepo productRepo;
+    public PriceServiceImpl(PriceRepo priceRepo,ProductRepo productRepo){
+        this.priceRepo = priceRepo;
+        this.productRepo = productRepo;
+    }
 
     @Override
     public PriceResponse addPrice(PriceRequest priceRequest) {
         Price price = new Price();
         price.setPriceType(priceRequest.getPriceType());
         price.setPrice(priceRequest.getPrice());
-        price.setIdentifier(priceRequest.getIdentifier());
         Product product = productRepo.findById(priceRequest.getProductId()).get();
         price.setProduct(product);
         Price addedprice = priceRepo.saveAndFlush(price);
@@ -34,7 +37,6 @@ public class PriceServiceImpl implements PriceService {
         PriceResponse priceResponse = new PriceResponse();
         priceResponse.setPriceType(addedprice.getPriceType());
         priceResponse.setPrice(addedprice.getPrice());
-        priceResponse.setIdentifier(addedprice.getIdentifier());
         priceResponse.setProductId(addedprice.getProduct().getId());
         return priceResponse;
     }

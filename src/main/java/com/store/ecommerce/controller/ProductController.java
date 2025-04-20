@@ -24,14 +24,20 @@ public class ProductController {
     }
 
     @GetMapping("/getAllProducts")
-    public ResponseEntity<List<ProductResponse>> getAllProducts(){
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
         List<ProductResponse> productResponses = productService.getAllProducts();
-        return new ResponseEntity<>(productResponses,HttpStatus.OK);
+        return new ResponseEntity<>(productResponses, HttpStatus.OK);
     }
 
     @GetMapping("/getProductByName/{productName}")
-    public ResponseEntity<ProductResponse> getProductByName(@PathVariable  String productName){
+    public ResponseEntity<ProductResponse> getProductByName(@PathVariable String productName) {
         ProductResponse productResponse = productService.getProductByName(productName);
-        return new ResponseEntity<>(productResponse,HttpStatus.OK);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/getProductsByCategory/{categoryName}")
+    public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable String categoryName) {
+        List<ProductResponse> productResponses = productService.getProductsByCategory(categoryName);
+        return new ResponseEntity<>(productResponses, HttpStatus.OK);
     }
 }

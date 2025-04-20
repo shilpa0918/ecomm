@@ -64,4 +64,10 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepo.findByProductName(productName);
         return convertedToProductDto(product);
     }
+
+    @Override
+    public List<ProductResponse> getProductsByCategory(String categoryName) {
+        List<Product> products = productRepo.findByCategoryCategoryName(categoryName);
+        return products.stream().map(this::convertedToProductDto).collect(Collectors.toList());
+    }
 }

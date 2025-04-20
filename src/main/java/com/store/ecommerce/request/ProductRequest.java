@@ -17,7 +17,6 @@ public class ProductRequest {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Integer categoryId;
-    private List<Attribute> attributes;
     private Integer markForDelete;
     private String identifier;
     private String keyword;
