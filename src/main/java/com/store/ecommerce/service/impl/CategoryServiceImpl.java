@@ -57,4 +57,24 @@ public class CategoryServiceImpl implements CategoryService {
         categoryResponse.setUpdatedAt(savedCategory.getUpdatedAt());
         return categoryResponse;
     }
+
+    @Override
+    public CategoryResponse updateCategory(CategoryRequest categoryRequest, Integer categoryId) {
+        Category category = categoryRepo.findById(categoryId).get();
+        category.setCategoryName(categoryRequest.getCategoryName());
+        category.setDescription(categoryRequest.getDescription());
+        category.setKeyword(categoryRequest.getKeyword());
+        category.setMarkForDelete(categoryRequest.getMarkForDelete());
+        category.setIdentifier(categoryRequest.getIdentifier());
+        category.setCreatedAt(categoryRequest.getCreatedAt());
+        category.setUpdatedAt(categoryRequest.getUpdatedAt());
+        Category savedCategory = categoryRepo.saveAndFlush(category);
+        return convertedToCategoryDto(savedCategory);
+    }
+
+    @Override
+    public void deleteCategory(Integer categoryId) {
+        categoryRepo.deleteById(categoryId);
+    }
+
 }

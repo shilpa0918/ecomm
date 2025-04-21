@@ -13,4 +13,8 @@ public interface CategoryService {
     Category findCategoryByid(Integer id);
 
     CategoryResponse addCategory(CategoryRequest categoryRequest);
+
+    CategoryResponse updateCategory(CategoryRequest categoryRequest, Integer categoryId);
+
+    void deleteCategory(Integer categoryId);
 }

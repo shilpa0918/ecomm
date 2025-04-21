@@ -45,4 +45,22 @@ public class ProductController {
         ProductResponse productResponse = productService.updateProductById(productId,productRequest);
         return new ResponseEntity<>(productResponse,HttpStatus.OK);
     }
+    @PostMapping("/addProducts")
+    public ResponseEntity<List<ProductResponse>> addProducts(@RequestBody List<ProductRequest> productRequests){
+        List<ProductResponse> productResponses = productService.addProducts(productRequests);
+        return new ResponseEntity<>(productResponses,HttpStatus.CREATED);
+
+    }
+    @PostMapping("/addProductList")
+    public ResponseEntity<List<ProductResponse>> addProductList(@RequestBody List<ProductRequest> productRequests){
+        List<ProductResponse> productResponses = productService.addProductList(productRequests);
+        return new ResponseEntity<>(productResponses,HttpStatus.CREATED);
+
+    }
+    @DeleteMapping("/deleteProduct/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable Integer productId){
+        productService.deleteProduct(productId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 }

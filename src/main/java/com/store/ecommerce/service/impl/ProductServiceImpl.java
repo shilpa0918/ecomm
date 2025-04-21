@@ -7,13 +7,16 @@ import com.store.ecommerce.repo.ProductRepo;
 import com.store.ecommerce.request.ProductRequest;
 import com.store.ecommerce.respose.ProductResponse;
 import com.store.ecommerce.service.ProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -71,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
         return products.stream().map(this::convertedToProductDto).collect(Collectors.toList());
     }
 
-    public ProductResponse updateProductById(Integer productId,ProductRequest productRequest) {
+    public ProductResponse updateProductById(Integer productId, ProductRequest productRequest) {
         Product updatedProduct = productRepo.findById(productId).get();
         updatedProduct.setUpdatedAt(productRequest.getUpdatedAt());
         updatedProduct.setDescription(productRequest.getDescription());
@@ -82,5 +85,53 @@ public class ProductServiceImpl implements ProductService {
         updatedProduct.setIdentifier(productRequest.getIdentifier());
         Product savedUpdatedProduct = productRepo.saveAndFlush(updatedProduct);
         return convertedToProductDto(savedUpdatedProduct);
+    }
+
+    @Override
+    public List<ProductResponse> addProducts(List<ProductRequest> productRequests) {
+        log.info(System.currentTimeMillis() / 60);
+        List<Product> productList = productRequests.stream().map(productRequest -> {
+            Product product = new Product();
+            product.setProductName(productRequest.getProductName());
+            product.setDescription(productRequest.getDescription());
+            product.setCreatedAt(productRequest.getCreatedAt());
+            Category category = categoryRepo.findById(productRequest.getCategoryId()).get();
+            product.setCategory(category);
+            product.setUpdatedAt(productRequest.getUpdatedAt());
+            product.setStock(productRequest.getStock());
+            product.setMarkForDelete(productRequest.getMarkForDelete());
+            product.setKeyword(productRequest.getKeyword());
+            product.setIdentifier(productRequest.getIdentifier());
+            return productRepo.saveAndFlush(product);
+        }).toList();
+        log.info(System.currentTimeMillis() / 60);
+        return productList.stream().map(this::convertedToProductDto).toList();
+    }
+
+    @Override
+    public List<ProductResponse> addProductList(List<ProductRequest> productRequests) {
+        List<Product> productList = productRequests.stream().map(productRequest -> {
+            Product product = new Product();
+            log.info(System.currentTimeMillis() / 60);
+            product.setProductName(productRequest.getProductName());
+            product.setDescription(productRequest.getDescription());
+            product.setCreatedAt(productRequest.getCreatedAt());
+            Category category = categoryRepo.findById(productRequest.getCategoryId()).get();
+            product.setCategory(category);
+            product.setUpdatedAt(productRequest.getUpdatedAt());
+            product.setStock(productRequest.getStock());
+            product.setMarkForDelete(productRequest.getMarkForDelete());
+            product.setKeyword(productRequest.getKeyword());
+            product.setIdentifier(productRequest.getIdentifier());
+            return product;
+        }).toList();
+        List<Product> savedProductData = productRepo.saveAllAndFlush(productList);
+        log.info(System.currentTimeMillis() / 60);
+        return savedProductData.stream().map(this::convertedToProductDto).toList();
+    }
+
+    @Override
+    public void deleteProduct(Integer productId) {
+        productRepo.deleteById(productId);
     }
 }

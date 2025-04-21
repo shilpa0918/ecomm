@@ -31,9 +31,20 @@ public class CategoryController {
     }
 
     @PostMapping("/addCategory")
-    public ResponseEntity<CategoryResponse> addCategory(@RequestBody CategoryRequest categoryRequest){
+    public ResponseEntity<CategoryResponse> addCategory(@RequestBody CategoryRequest categoryRequest) {
         CategoryResponse categoryResponse = categoryService.addCategory(categoryRequest);
-        return new ResponseEntity<>(categoryResponse,HttpStatus.CREATED);
+        return new ResponseEntity<>(categoryResponse, HttpStatus.CREATED);
     }
 
+    @PutMapping("/updateCategory/{categoryId}")
+    public ResponseEntity<CategoryResponse> updateCategory(@RequestBody CategoryRequest categoryRequest,
+                                                           @PathVariable Integer categoryId) {
+        CategoryResponse categoryResponse = categoryService.updateCategory(categoryRequest, categoryId);
+        return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
+    }
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity deleteCategory(@PathVariable Integer categoryId){
+        categoryService.deleteCategory(categoryId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
