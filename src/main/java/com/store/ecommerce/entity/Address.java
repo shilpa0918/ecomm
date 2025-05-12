@@ -1,26 +1,28 @@
 package com.store.ecommerce.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 @Builder
-public class AttributeValue {
+@Table(name = "addr")
+public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String attrValue;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Attribute attribute;
-    private Integer markForDelete;
-    private String identifier;
-    private String keyword;
-    private LocalDateTime updatedAt;
+    private String city;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @ManyToOne
+    private Users users;
 }

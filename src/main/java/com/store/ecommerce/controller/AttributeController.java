@@ -29,6 +29,18 @@ public class AttributeController {
         return new ResponseEntity<>(attributeResponses, HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteByAttributeName/{attrName}")
+    public ResponseEntity deleteByAttributeName(@PathVariable String attrName) {
+        attributeService.deleteByAttributeName(attrName);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/deleteByAttributeId/{attrId}")
+    public ResponseEntity deleteByAttributeId(@PathVariable String attrId) {
+        attributeService.deleteByAttributeId(attrId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }
 
 

@@ -1,6 +1,7 @@
 package com.store.ecommerce.controller;
 
 import com.store.ecommerce.request.ProductRequest;
+import com.store.ecommerce.respose.ProductCategoryResponse;
 import com.store.ecommerce.respose.ProductResponse;
 import com.store.ecommerce.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class ProductController {
     }
 
     @GetMapping("/getProductsByCategory/{categoryName}")
-    public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable String categoryName) {
-        List<ProductResponse> productResponses = productService.getProductsByCategory(categoryName);
+    public ResponseEntity<List<ProductCategoryResponse>> getProductsByCategory(@PathVariable String categoryName) {
+        List<ProductCategoryResponse> productResponses = productService.getProductsByCategory(categoryName);
         return new ResponseEntity<>(productResponses, HttpStatus.OK);
     }
     @PutMapping("/updateProductById/{productId}")

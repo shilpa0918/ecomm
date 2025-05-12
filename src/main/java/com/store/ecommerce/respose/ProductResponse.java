@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class ProductResponse {
     private String productName;
     private String description;
-    private int stock;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Integer categoryId;

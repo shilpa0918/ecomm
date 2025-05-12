@@ -9,4 +9,8 @@ public interface AttributeService {
     AttributeResponse addAttribute(AttributeRequest attributeRequest);
 
     List<AttributeResponse> getAllAttributes();
+
+    void deleteByAttributeName(String attrName);
+
+    void deleteByAttributeId(String attrId);
 }

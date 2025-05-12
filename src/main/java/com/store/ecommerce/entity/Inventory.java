@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +20,7 @@ public class Inventory {
     private Integer quantity;
     @ManyToOne
     private Product product;
+    private Long storeId;
+    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
 }

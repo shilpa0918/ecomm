@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -21,4 +22,6 @@ public class Price {
     private String priceType; //OFFER, LIST
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Product product;
+    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +20,6 @@ public class Image {
     private String imageUrl;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Product product;
+    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
 }
