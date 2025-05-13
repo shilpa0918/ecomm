@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class AddProductServiceImpl implements AddProductService {
@@ -33,7 +32,6 @@ public class AddProductServiceImpl implements AddProductService {
 
     @Override
     public PdpProductResponse pdpAddProduct(AddProductRequest productRequest) {
-        PdpProductResponse productResponse = new PdpProductResponse();
         //Product Entity
         Product product = new Product();
         product.setProductName(productRequest.getProductRequest().getProductName());
@@ -229,6 +227,12 @@ public class AddProductServiceImpl implements AddProductService {
         //SaveProduct
         Product updatedProduct = productRepo.saveAndFlush(product);
         return convertedIntoProductDto(updatedProduct);
+    }
+
+    @Override
+    public List<PdpProductResponse> getProductsByAttribute(String attributeName, String attributeValue) {
+        List<Product> products = productRepo.findProductByAttrNameAndAttrValue(attributeName,attributeValue);
+        return products.stream().map(this::convertedIntoProductDto).toList();
     }
 
 }
